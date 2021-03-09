@@ -13,3 +13,19 @@ jobs:
           flutter-version: "2.0.1"
       - run: flutter pub get
       - run: flutter test
+    
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Pushes to epitech's repository"
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'output'
+          destination-github-username: 'EpitechIT2020'
+          destination-repository-name: 'T-DEV-600-MPL-6-1-epicture-maxime.di-natale'
+          user-email: maxime.di-natale@epitech.eu
+
