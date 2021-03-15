@@ -12,7 +12,7 @@
   <h3 align="center">Flutter です</h3>
   <br/>
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a>
     <img src="images/flutterDesu.svg" alt="Logo" width="120" height="120">
   </a>
   <p align="center">
