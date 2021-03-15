@@ -12,7 +12,9 @@
   <h3 align="center">Flutter です</h3>
   <br/>
 <p align="center">
+  <a href="https://github.com/PivotStick/Flutter">
     <img src="images/flutterDesu.svg" alt="Logo" width="120" height="120">
+  </a>
   <p align="center">
     <br />
     <a href="https://github.com/PivotStick/Flutter"><strong>Explore the docs »</strong></a>
