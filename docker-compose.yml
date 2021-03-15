@@ -1,0 +1,10 @@
+﻿version: "3"
+
+services:
+  desu:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "808:4040"
+    container_name: flutter_desu
