@@ -30,17 +30,30 @@ class Gallery {
   });
 
   static Gallery fromJSON(Map<String, dynamic> json) {
+    var images = List<String>.from(
+      (json["images"] ??
+              [
+                {
+                  "link":
+                      "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png"
+                }
+              ])
+          .map<String>((e) => e["link"].endsWith(".mp4")
+              ? "https://www.reziew.com/wp-content/uploads/2016/03/video-player-placeholder-very-large.png"
+              : e["link"] as String),
+    );
+
     return new Gallery(
         id: json["id"],
         title: json["title"],
-        description: json["description"],
+        description: json["description"] ?? "",
         author: json["account_url"],
         viewCount: json["views"],
         upCount: json["ups"],
         commentCount: json["comment_count"],
         isFavorite: json["favorite"],
-        tags: null,
-        images: null,
+        tags: [],
+        images: images,
         authorAvatar: "https://imgur.com/user/${json["account_url"]}/avatar");
   }
 }
