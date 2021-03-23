@@ -1,9 +1,5 @@
-import 'dart:convert';
-import 'dart:html';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-
-import 'Models/User.dart';
+import 'Services/Wiew.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,16 +21,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -42,32 +28,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final clientId = "e089ad86713c1d6";
-  final clientSecret = "";
+  static final clientId = "69c3448cf52920b";
+  final clientSecret = "7109f60b96d1b7ba9c967ba2d142d8a58e933e9e";
+  final authorizationUrl = Uri.parse(
+      'https://api.imgur.com/oauth2/authorize?client_id=$clientId&response_type=token');
+  final tokenEndpoint = Uri.parse('https://api.imgur.com/oauth2/token');
+  final redirectUrl = 'http://localhost:50565/oauth2/callback';
 
-  Future<User> getUser() async {
-    var res = await http.get(
-        Uri.https('api.imgur.com', '/3/account/GuiEpitech34'),
-        headers: {"Authorization": "Client-Id $clientId"});
+  var page = false;
 
-    var data = json.decode(res.body);
-
-    return User.fromJson(data["data"]);
+  void changePage() {
+    setState(() {
+      page = !page;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-          child: FutureBuilder(
-              future: getUser(),
-			  initialData: User(id: 1, name:"Maxime"),
-              builder: (context, snapshot) {
-                  return Text(snapshot.data.name);
-              })),
-    );
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: page ? Text("Poutre") : displayWiew(),
+        
+        floatingActionButton: FloatingActionButton(onPressed: changePage),
+      );
   }
 }

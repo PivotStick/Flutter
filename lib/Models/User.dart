@@ -4,7 +4,7 @@ class User {
 
   User({this.id, this.name});
 
-  static User fromJson(Map<String, dynamic> json) {
+  factory User.fromJson(Map<String, dynamic> json) {
     return User(id: json["id"], name: json["url"]);
   }
 }
